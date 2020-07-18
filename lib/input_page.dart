@@ -1,8 +1,11 @@
+import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'components/card.dart';
 import 'components/icon_content.dart';
 import 'components/constants.dart';
+import 'results_page.dart';
+import 'calculator.dart';
 
 enum Gender { male, female }
 
@@ -138,7 +141,7 @@ class _InputPageState extends State<InputPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                'HEIGHT',
+                                'WEIGHT',
                                 style: kLabelTextStyle,
                               ),
                               SizedBox(height: 4.0),
@@ -219,11 +222,36 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kButtonHeight,
-            color: kComplimentaryColour,
+          GestureDetector(
+            onTap: () {
+              Calculator calculator =
+                  Calculator(height: height, weight: weight);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResultsPage(
+                            bmi: calculator.calculateBMI(),
+                            bmiCategory: calculator.bmiCategory(),
+                            bmiInterpretation: calculator.bmiInterpretation(),
+                          )));
+            },
+            child: Container(
+                margin: EdgeInsets.only(top: 10.0),
+                padding: EdgeInsets.only(bottom: 15.0),
+                width: double.infinity,
+                height: kButtonHeight,
+                color: kComplimentaryColour,
+                child: Center(
+                  child: Text(
+                    'CALCULATE',
+                    style: TextStyle(
+                      fontFamily: 'Comfortaa',
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
+                  ),
+                )),
           )
         ],
       ),
@@ -252,7 +280,7 @@ class CustomCircularButton extends StatelessWidget {
       shape: CircleBorder(),
       child: Icon(
         icon,
-        size: 18.0,
+        size: 24.0,
       ),
     );
   }
