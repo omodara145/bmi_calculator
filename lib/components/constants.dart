@@ -9,7 +9,7 @@ const kButtonHeight = 80.0;
 
 const kLabelTextStyle = TextStyle(
   fontFamily: 'Comfortaa',
-  fontSize: 16.0,
+  fontSize: 15.0,
   color: Color(0xFF8D8E98),
 );
 
